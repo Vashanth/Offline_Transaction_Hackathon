@@ -3,8 +3,11 @@ import {Text,Button,StyleSheet,View,Modal} from 'react-native'
 
 class Home extends Component
 {
+    state = {
+        MyID : Math.floor((Math.random() * 999999) + 100000)
+    }
     scan = () => {
-        this.props.navigation.navigate('QRScan')
+        this.props.navigation.navigate('QRScan',this.state.MyID)
     }
 
     generate = () => {
@@ -14,7 +17,7 @@ class Home extends Component
     {
         return(
         <View>
-        <Text style={styles.headerText}>MENU PAGE:</Text>
+        <Text style={styles.headerText}>DEVICE ID = ( {this.state.MyID} )</Text>
         <View style={styles.viewStyle}>
             <Button title="QR Scanner" color="red" onPress={this.scan}/>
         <Text>{"\n"}</Text>

@@ -5,15 +5,26 @@ import QRCode from 'react-native-qrcode-svg';
 class QRGenerate extends Component
 {
     state = {
-        data:"900-12100"
+        DeviceID:"",
+        amount:"",
     }
+
+    componentWillMount()
+    {
+        this.setState({
+            DeviceID:this.props.navigation.state.params.DeviceID.toString(),
+            amount:this.props.navigation.state.params.amount.toString()
+        })
+    }
+
     render()
     {
-        const str = this.state.amount+";"+this.state.deviceId
+        const  str=this.state.DeviceID+"-"+this.state.amount
+        console.log(this.state.DeviceID)
         return(
             <View style={styles.viewStyle}>
             <QRCode
-            value={this.state.data}
+            value={str}
             size={250}
           />
           </View>

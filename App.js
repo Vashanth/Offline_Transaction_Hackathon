@@ -10,7 +10,6 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Navigator from './routes/HomeStack'
-import QRScan from '../AwesomeProject/components/QRScan'
 
 import {
   Header,

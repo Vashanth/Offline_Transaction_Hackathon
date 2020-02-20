@@ -3,7 +3,7 @@ import {createAppContainer} from 'react-navigation'
 import Home from '../components/Home'
 import QRScan from '../components/QRScan'
 import QRGenerate from '../components/QRGenerate'
-
+import DeviceID from'../components/DeviceID'
 const screens = {
     Home : {
         screen:Home
@@ -13,6 +13,9 @@ const screens = {
     },
     QRGenerate : {
         screen:QRGenerate
+    },
+    DeviceID: {
+        screen:DeviceID
     }
 }
 

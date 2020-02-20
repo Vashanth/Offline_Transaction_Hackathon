@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text,Button,StyleSheet,View} from 'react-native'
+import {Text,Button,StyleSheet,View,Modal} from 'react-native'
 
 class Home extends Component
 {
@@ -8,7 +8,7 @@ class Home extends Component
     }
 
     generate = () => {
-        this.props.navigation.navigate('QRGenerate')
+        this.props.navigation.navigate('DeviceID')
     }
     render()
     {

@@ -1,11 +1,38 @@
 import React, {Component} from 'react'
-import {Text,Button,StyleSheet,View,Modal} from 'react-native'
+import {Text,Button,StyleSheet,View,Modal,Image, TouchableOpacity} from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Home extends Component
 {
     state = {
-        MyID : Math.floor((Math.random() * 999999) + 100000)
+        MyID : Math.floor((Math.random() * 999999) + 100000),
+        balance:0
     }
+
+    componentWillMount()
+    {
+        this.getBalance()
+    }
+
+    storeBalance = async () => {
+        try {
+          await AsyncStorage.setItem('balance', '10000')
+        } catch (e) {}
+      }
+
+      getBalance = async () => {
+        try {
+          const value = await AsyncStorage.getItem('balance')
+          if(value !== null) {
+            this.setState({balance:parseInt(value)})
+          }
+        } catch(e) {}
+      }
+
+      updateBalance = (e) => {
+          console.log(e)
+      }
+
     scan = () => {
         this.props.navigation.navigate('QRScan',this.state.MyID)
     }
@@ -23,6 +50,12 @@ class Home extends Component
         <Text>{"\n"}</Text>
             <Button title="QR Generator" color="red" onPress={this.generate}/>
         </View>
+
+        <Text style={{fontSize:15,fontWeight:'bold'}}>                     BALANCE IN WALLET:</Text>
+        <View style={styles.square}>
+        <Text style={styles.textStyle}>      {this.state.balance}</Text>
+        </View>
+
         </View>
         )
     }
@@ -37,6 +70,19 @@ const styles = StyleSheet.create({
     viewStyle:{
         padding:10,
         margin:10
+    },
+    square: {
+        width: 200,
+        height: 50,
+        backgroundColor: 'lightgray',
+        marginLeft:80,
+        marginTop:20,
+        borderStyle:'dotted',
+        borderWidth:2
+    },
+    textStyle:{
+        fontSize:25,
+        fontWeight:'bold'
     }
 })
 

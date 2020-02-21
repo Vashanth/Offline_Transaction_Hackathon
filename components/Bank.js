@@ -18,12 +18,30 @@ class Bank extends Component
         const headers = {
             "auth-token" : await AsyncStorage.getItem('tokens')
         }
-        console.log(headers)
         await axios.get('https://guarded-everglades-05881.herokuapp.com/payment/view',
         {"headers":headers}
         )
         .then(res=>this.setState({bankBalance:res.data.amount}))
         .catch(e=>Alert.alert(e.message))
+    }
+
+    getBank = async() => {
+        let amount = this.state.amount
+        const headers = {
+            "auth-token" : await AsyncStorage.getItem('tokens')            
+        }
+        await axios.put('https://guarded-everglades-05881.herokuapp.com/payment/get',
+        {amount},
+        {"headers":headers}
+        ).then(async(res)=>{
+            let bal = await AsyncStorage.getItem('balance')
+            bal=parseInt(bal)
+            bal=bal+parseInt(this.state.amount)
+            await AsyncStorage.setItem('balance',bal.toString())
+            Alert.alert('Successful Withdrawal')
+            this.getBalance()
+            this.setState({amount:""})
+        }).catch(e=>Alert.alert(e.message))
     }
 
     putBank = async() =>{

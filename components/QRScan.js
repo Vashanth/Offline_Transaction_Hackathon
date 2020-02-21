@@ -4,6 +4,7 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Alert } from 're
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationEvents} from 'react-navigation'
+//import RNExitApp from 'react-native-exit-app'
 var aesjs = require('aes-js')
 
 class QRScan extends PureComponent {
@@ -92,7 +93,7 @@ class QRScan extends PureComponent {
         }
         this.setState({ barcodes });
     }
-
+    //RNExitApp.exitApp();
     this.props.navigation.goBack()
   }
 }

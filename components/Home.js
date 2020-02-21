@@ -63,7 +63,7 @@ class Home extends Component
     render()
     {
         return(
-        <View>
+        <View style={styles.backGround}>
         <Text style={styles.headerText}>DEVICE ID = ( {this.state.MyID} )</Text>
         <View style={styles.viewStyle}>
             <Button title="QR Scanner" color="red" onPress={this.scan}/>
@@ -77,7 +77,7 @@ class Home extends Component
         <View style={styles.square}>
         <Text style={styles.textStyle}>      ₹{this.state.balance}</Text>
         </View>
-
+        <Text>{"\n\n\n\n\n\n\n\n\n\n\n"}</Text>
         </View>
         )
     }
@@ -89,6 +89,9 @@ const styles = StyleSheet.create({
         fontSize:20,
         alignContent:"center"
     },
+    backGround:{
+        backgroundColor:'#fade61'
+    },  
     viewStyle:{
         padding:10,
         margin:10

@@ -1,9 +1,9 @@
 'use strict';
 import React, { PureComponent } from 'react';
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import {NavigationEvents} from 'react-navigation'
 var aesjs = require('aes-js')
 
 class QRScan extends PureComponent {
@@ -36,6 +36,7 @@ class QRScan extends PureComponent {
           onGoogleVisionBarcodesDetected={this.barcodeRecognized}
         >
         </RNCamera>
+
       </View>
     );
   }
@@ -91,8 +92,8 @@ class QRScan extends PureComponent {
         }
         this.setState({ barcodes });
     }
-    
-    this.props.navigation.navigate('Home')
+
+    this.props.navigation.goBack()
   }
 }
 

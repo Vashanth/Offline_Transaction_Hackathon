@@ -55,6 +55,11 @@ class Home extends Component
     generate = () => {
         this.props.navigation.navigate('DeviceID')
     }
+
+    online = () =>{
+        this.props.navigation.navigate('Online')
+    }
+
     render()
     {
         return(
@@ -65,7 +70,7 @@ class Home extends Component
         <Text>{"\n"}</Text>
             <Button title="QR Generator" color="red" onPress={this.generate}/>
         <Text>{"\n"}</Text>
-        <Button title="Get from Bank" color="red" onPress={this.generate}/>
+        <Button title="Get from Bank" color="red" onPress={this.online}/>
         <Text>{"\n"}</Text>
         <Button title="Put into Bank" color="red" onPress={this.generate}/>
         </View>

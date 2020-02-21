@@ -9,14 +9,41 @@ class Bank extends Component
         bankBalance:100
     }
 
+    componentDidMount()
+    {
+        this.getBalance()
+    }
+
+    getBalance = async() => {
+        const headers = {
+            "auth-token" : await AsyncStorage.getItem('tokens')
+        }
+        console.log(headers)
+        await axios.get('https://guarded-everglades-05881.herokuapp.com/payment/view',
+        {"headers":headers}
+        )
+        .then(res=>this.setState({bankBalance:res.data.amount}))
+        .catch(e=>Alert.alert(e.message))
+    }
+
     putBank = async() =>{
-        const amount=this.state.amount
+        const headers = {
+            "auth-token" : await AsyncStorage.getItem('tokens')
+        }
+        let amount=this.state.amount
+        amount=parseInt(amount)
         let bal = await AsyncStorage.getItem('balance')
-        if(this.state.amount<bal)
+        bal=parseInt(bal)
+        console.log(bal,amount)
+        if(amount<=bal)
         {
-            await axios.put('https://guarded-everglades-05881.herokuapp.com/payment/put/',{amount})
-            .then(res=>{
+            await axios.put('https://guarded-everglades-05881.herokuapp.com/payment/put/',{amount},
+            {"headers":headers})
+            .then(async(res)=>{
+                await AsyncStorage.setItem('balance',(bal-amount).toString())
                 Alert.alert("Succesful Transaction Hooray!")
+                this.getBalance()
+                this.setState({amount:""})
             }).catch(e=>Alert.alert(e.message))        
         }
         else{

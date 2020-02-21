@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Text, StyleSheet,View} from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class QRGenerate extends Component
 {
@@ -15,7 +16,7 @@ class QRGenerate extends Component
             DeviceID:this.props.navigation.state.params.DeviceID.toString(),
             amount:this.props.navigation.state.params.amount.toString()
         })
-    }
+        }
 
     render()
     {

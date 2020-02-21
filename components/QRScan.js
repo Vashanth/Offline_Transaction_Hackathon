@@ -54,6 +54,10 @@ class QRScan extends PureComponent {
             console.log(currBalance)
             await AsyncStorage.setItem('balance',currBalance.toString())
         }
+        else
+        {
+          console.warn("Wrong Device ID")
+        }
         this.setState({ barcodes });
     }
   }

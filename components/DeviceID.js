@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import {Text,View,StyleSheet,Button,TextInput} from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 class DeviceID extends Component
 {
@@ -8,8 +9,15 @@ class DeviceID extends Component
         amount:100
     }
 
-    fun = () => {
+    fun = async() => {
+        let balance=await AsyncStorage.getItem('balance')
+        if(parseInt(balance)-parseInt(this.state.amount)>=0)
+        {
+        await AsyncStorage.setItem('balance',(parseInt(balance)-parseInt(this.state.amount)).toString())
         this.props.navigation.navigate('QRGenerate',this.state)
+        }
+        else 
+        console.warn("Insufficient balance")
     }
 
     render()

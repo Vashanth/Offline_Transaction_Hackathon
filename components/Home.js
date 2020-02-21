@@ -64,6 +64,10 @@ class Home extends Component
             <Button title="QR Scanner" color="red" onPress={this.scan}/>
         <Text>{"\n"}</Text>
             <Button title="QR Generator" color="red" onPress={this.generate}/>
+        <Text>{"\n"}</Text>
+        <Button title="Get from Bank" color="red" onPress={this.generate}/>
+        <Text>{"\n"}</Text>
+        <Button title="Put into Bank" color="red" onPress={this.generate}/>
         </View>
 
         <Text style={{fontSize:15,fontWeight:'bold'}}>                     BALANCE IN WALLET:</Text>

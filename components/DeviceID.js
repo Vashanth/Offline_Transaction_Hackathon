@@ -14,6 +14,8 @@ class DeviceID extends Component
         if(parseInt(balance)-parseInt(this.state.amount)>=0)
         {
         await AsyncStorage.setItem('balance',(parseInt(balance)-parseInt(this.state.amount)).toString())
+        balance=await AsyncStorage.getItem('balance')
+        console.log(balance)
         this.props.navigation.navigate('QRGenerate',this.state)
         }
         else 

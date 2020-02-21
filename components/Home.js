@@ -70,14 +70,12 @@ class Home extends Component
         <Text>{"\n"}</Text>
             <Button title="QR Generator" color="red" onPress={this.generate}/>
         <Text>{"\n"}</Text>
-        <Button title="Get from Bank" color="red" onPress={this.online}/>
-        <Text>{"\n"}</Text>
-        <Button title="Put into Bank" color="red" onPress={this.generate}/>
+        <Button title="Bank Transactions" color="red" onPress={this.online}/>
         </View>
 
         <Text style={{fontSize:15,fontWeight:'bold'}}>                     BALANCE IN WALLET:</Text>
         <View style={styles.square}>
-        <Text style={styles.textStyle}>      {this.state.balance}</Text>
+        <Text style={styles.textStyle}>      ₹{this.state.balance}</Text>
         </View>
 
         </View>
@@ -98,7 +96,7 @@ const styles = StyleSheet.create({
     square: {
         width: 200,
         height: 50,
-        backgroundColor: 'lightgray',
+        backgroundColor: 'lightgreen',
         marginLeft:80,
         marginTop:20,
         borderStyle:'dotted',

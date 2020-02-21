@@ -5,6 +5,7 @@ import QRScan from '../components/QRScan'
 import QRGenerate from '../components/QRGenerate'
 import DeviceID from'../components/DeviceID'
 import Online from '../components/Online'
+import Bank from '../components/Bank'
 const screens = {
     Home : {
         screen:Home
@@ -20,6 +21,9 @@ const screens = {
     },
     Online:{
         screen:Online
+    },
+    Bank:{
+        screen:Bank
     }
 }
 

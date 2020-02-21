@@ -14,7 +14,7 @@ class Online extends Component
         .then(async(res)=>{
             console.log(res.data.token)
             await AsyncStorage.setItem('tokens',res.data.token)
-
+            this.props.navigation.navigate('Bank')
         }).catch(e=>{
             this.setState({name:"",password:""})
             Alert.alert("Wrong credentials")

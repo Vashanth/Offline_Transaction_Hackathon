@@ -21,7 +21,6 @@ class QRGenerate extends Component
     {
         const  str=(this.state.DeviceID+"-"+this.state.amount).split('').reverse().join('*') 
         console.log(str)
-        console.log(this.state.DeviceID)
         return(
             <View style={styles.viewStyle}>
             <QRCode

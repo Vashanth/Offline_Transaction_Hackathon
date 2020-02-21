@@ -2,10 +2,12 @@
 import React, { PureComponent } from 'react';
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class QRScan extends PureComponent {
     state = {
         barcodes: [],
+        count:0
       }
   render() {
     return (
@@ -36,9 +38,24 @@ class QRScan extends PureComponent {
     );
   }
 
-  barcodeRecognized = ({ barcodes }) => {
-      console.warn(barcodes[0].data)
-      this.setState({ barcodes });
+  barcodeRecognized = async({ barcodes }) => {
+    if(this.state.count==0)
+    {
+        console.warn(barcodes[0].data)
+        const str = barcodes[0].data.split('*').reverse().join('')
+        const ar=str.split('-')
+        const DeviceId = await AsyncStorage.getItem('DeviceID')
+
+        if(ar[0]==DeviceId)
+        {
+          this.setState({count:1})
+          let currBalance = await AsyncStorage.getItem('balance')
+            currBalance=parseInt(currBalance)+parseInt(ar[1])
+            console.log(currBalance)
+            await AsyncStorage.setItem('balance',currBalance.toString())
+        }
+        this.setState({ barcodes });
+    }
   }
 }
 

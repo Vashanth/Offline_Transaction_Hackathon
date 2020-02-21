@@ -11,7 +11,20 @@ class Home extends Component
 
     componentWillMount()
     {
+        this.setDeviceID()
         this.getBalance()
+    }
+
+    componentDidUpdate()
+    {
+        this.getBalance()
+    }
+
+    setDeviceID = async() => {
+        try{
+            await AsyncStorage.setItem('DeviceID',this.state.MyID.toString())
+        }
+        catch(e){}
     }
 
     storeBalance = async () => {
@@ -26,6 +39,8 @@ class Home extends Component
           if(value !== null) {
             this.setState({balance:parseInt(value)})
           }
+          else
+          this.storeBalance()
         } catch(e) {}
       }
 

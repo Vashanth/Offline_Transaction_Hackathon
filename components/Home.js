@@ -28,7 +28,7 @@ class Home extends Component
     }
 
     storeBalance = async () => {
-          await AsyncStorage.setItem('balance', '10000')
+          await AsyncStorage.setItem('balance', '0')
       }
 
       getBalance = async () => {
@@ -38,7 +38,9 @@ class Home extends Component
             this.setState({balance:parseInt(value)})
           }
           else
+          {
           this.storeBalance()
+          }
         } catch(e) {}
       }
 

@@ -6,7 +6,7 @@ class DeviceID extends Component
 {
     state={
         DeviceID:100,
-        amount:100
+        amount:0
     }
 
     fun = async() => {

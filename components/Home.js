@@ -15,6 +15,7 @@ class Home extends Component
         this.getBalance()
     }
 
+    
     componentDidUpdate()
     {
         this.getBalance()
@@ -62,6 +63,7 @@ class Home extends Component
 
     render()
     {
+        console.disableYellowBox = true;
         return(
         <View style={styles.backGround}>
         <Text style={styles.headerText}>DEVICE ID = ( {this.state.MyID} )</Text>
@@ -77,7 +79,7 @@ class Home extends Component
         <View style={styles.square}>
         <Text style={styles.textStyle}>      ₹{this.state.balance}</Text>
         </View>
-        <Text>{"\n\n\n\n\n\n\n\n\n\n\n"}</Text>
+        <Text>{"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}</Text>
         </View>
         )
     }

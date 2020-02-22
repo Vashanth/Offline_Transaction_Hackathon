@@ -28,9 +28,7 @@ class Home extends Component
     }
 
     storeBalance = async () => {
-        try {
           await AsyncStorage.setItem('balance', '10000')
-        } catch (e) {}
       }
 
       getBalance = async () => {

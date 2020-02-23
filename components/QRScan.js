@@ -4,6 +4,8 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Alert, BackHandl
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationEvents} from 'react-navigation'
+const Sound = require('react-native-sound')
+
 // import RNExitApp from 'react-native-exit-app'
 var aesjs = require('aes-js')
 
@@ -13,6 +15,11 @@ class QRScan extends PureComponent {
         count:0
       }
       componentDidMount() {
+        this.hello = new Sound('pay.mp3', Sound.MAIN_BUNDLE, (error) => {
+          if (error) {
+            console.log(error)
+          }
+        })
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
       }
       handleBackButton(){
@@ -93,16 +100,33 @@ class QRScan extends PureComponent {
             currBalance=parseInt(currBalance)+parseInt(amount)
             console.log(currBalance)
             await AsyncStorage.setItem('balance',currBalance.toString())
+            this.hello.play((success) => {
+              if (!success) {
+                console.log('Sound did not play')
+              }
+            })
+            
+          Alert.alert(
+            'Closing the app..',
+            'For Security Measures',
+            [
+              {text: 'OK', onPress: () => BackHandler.exitApp()},
+            ],
+            {cancelable: false},
+          );
+          
         }
         else
         {
           console.warn("Wrong Device ID")
         }
-        this.setState({ barcodes });
     }
     //RNExitApp.exitApp();
-    BackHandler.exitApp();
-    // this.props.navigation.goBack()
+   
+    //BackHandler.exitApp();
+
+     
+     //this.props.navigation.goBack()
   }
 }
 

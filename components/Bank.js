@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Text,Button,TextInput,View, Alert,StyleSheet} from 'react-native'
 import axios from 'axios'
 import AsyncStorage from '@react-native-community/async-storage'
+const Sound = require('react-native-sound')
+
 class Bank extends Component
 {
     state={
@@ -12,6 +14,11 @@ class Bank extends Component
     componentDidMount()
     {
         this.getBalance()
+        this.hello = new Sound('pay.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+              console.log(error)
+            }
+          })
     }
 
     getBalance = async() => {
@@ -26,6 +33,13 @@ class Bank extends Component
     }
 
     getBank = async() => {
+
+        // let hello = new Sound('wcm.mp3', Sound.MAIN_BUNDLE, (error) => {
+        //   if (error) {
+        //     console.log(error)
+        //   }
+        // })
+
         let amount = this.state.amount
         const headers = {
             "auth-token" : await AsyncStorage.getItem('tokens')            
@@ -41,6 +55,12 @@ class Bank extends Component
             Alert.alert('Successful Withdrawal')
             this.getBalance()
             this.setState({amount:""})
+            console.log(this.hello)
+            this.hello.play((success) => {
+              if (!success) {
+                console.log('Sound did not play')
+              }
+            })
         }).catch(e=>Alert.alert(e.message))
     }
 
@@ -55,6 +75,11 @@ class Bank extends Component
         console.log(bal,amount)
         if(amount<=bal)
         {
+            this.hello.play((success) => {
+                if (!success) {
+                  console.log('Sound did not play')
+                }
+              })
             await axios.put('https://guarded-everglades-05881.herokuapp.com/payment/put/',{amount},
             {"headers":headers})
             .then(async(res)=>{
@@ -81,9 +106,9 @@ class Bank extends Component
                     value={this.state.amount}
                 />
             <Text>{"\n"}</Text>
-            <Button title="Put into Bank" color="red" onPress={this.putBank}/>
+            <Button title="DEPOSIT" color="red" onPress={this.putBank}/>
         <Text>{"\n"}</Text>
-            <Button title="Get from Bank" color="red" onPress={this.getBank}/>
+            <Button title="WITHDRAW" color="red" onPress={this.getBank}/>
         <Text>{"\n"}</Text>
             <Text style={{fontSize:15,fontWeight:'bold'}}>                     BALANCE IN BANK:</Text>
             <View style={styles.square}>

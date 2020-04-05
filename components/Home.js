@@ -79,7 +79,7 @@ class Home extends Component
         <View style={styles.square}>
         <Text style={styles.textStyle}>      ₹{this.state.balance}</Text>
         </View>
-        <Text>{"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}</Text>
+        <Text>{"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}</Text>
         </View>
         )
     }
